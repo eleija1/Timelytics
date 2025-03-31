@@ -3,6 +3,10 @@ import streamlit as st
 import pickle
 import numpy as np
 from PIL import Image
+import gzip
+
+
+
 
 # Set the page configuration of the app, including the page title, icon, and layout.
 st.set_page_config(page_title="Timelytics", page_icon=":pencil:", layout="wide")
@@ -20,8 +24,10 @@ st.caption(
 
 
 # Load the trained ensemble model from the saved pickle file.
-modelfile = "./voting_model.pkl"
-voting_model = pickle.load(open(modelfile, "rb"))
+modelfile = "./voting_model.pkl.gz"
+with gzip.open(modelfile, 'rb') as f:
+    voting_model = pickle.load(f)
+
 
 # Caching the model for faster loading
 @st.cache_resource
