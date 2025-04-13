@@ -3,7 +3,7 @@ import streamlit as st
 import pickle
 import numpy as np
 from PIL import Image
-import gzip
+
 
 
 
@@ -24,9 +24,8 @@ st.caption(
 
 
 # Load the trained ensemble model from the saved pickle file.
-modelfile = "./voting_model.pkl.gz"
-with gzip.open(modelfile, 'rb') as f:
-    voting_model = pickle.load(f)
+modelfile = "./voting_model.pkl"
+    voting_model = pickle.load(open(modelfile, "rb"))
 
 
 # Caching the model for faster loading
